@@ -6,13 +6,12 @@ var textModel = require('../models/textModel');
 
 exports.getFiles = async function (req, res) {
   var deferred = Q.defer();
-  var arrOne = [];
-  await callback(arrOne);
+  await callback();
   deferred.resolve({ "status": 200, "message": "Text is saved  Successfully against every CV against its own id" });
   return deferred.promise;
 }
 
-async function callback(arrOne){
+async function callback(){
  await fs.readdir(cvFolder, async function(err,files){
     if(err) throw err;
     files.map(async Element => {
@@ -21,8 +20,6 @@ async function callback(arrOne){
         var doc = new textModel();
         doc.text = text;
         await doc.save();
-        arrOne.push(doc);
-        console.log(arrOne)
     })
   })
   })
